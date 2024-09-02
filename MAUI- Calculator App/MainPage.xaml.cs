@@ -52,14 +52,21 @@ public partial class MainPage : ContentPage
 
     void Calculate(object sender, EventArgs e)
     {
-        historyView.Text = "=" + resultView.Text;
+        try 
+        { 
+            historyView.Text = "=" + resultView.Text;
 
-        resultView.Text = Calc.Do(Convert.ToDouble(val1), Convert.ToDouble(val2), omath).ToString();
+            resultView.Text = Calc.Do(Convert.ToDouble(val1), Convert.ToDouble(val2), omath).ToString();
 
-        historyView.Text = resultView.Text;
+            historyView.Text = resultView.Text;
 
-        val1 = resultView.Text;
-        val2 = "";
+            val1 = resultView.Text;
+            val2 = "";        
+        }
+        catch(Exception ex)
+        {
+            Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+        }
 
     }
 }
